@@ -47,6 +47,20 @@ export function executeAction(actionName: string, fn: Function, scope?: any, arg
     }
 }
 
+export async function executeAsyncAction(
+    actionName: string,
+    fn: Function,
+    scope?: any,
+    args?: IArguments
+) {
+    const runInfo = startAction(actionName, fn, scope, args)
+    try {
+        return await fn.apply(scope, args)
+    } finally {
+        endAction(runInfo)
+    }
+}
+
 interface IActionRunInfo {
     prevDerivation: IDerivation | null
     prevAllowStateChanges: boolean
