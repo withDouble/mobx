@@ -1,5 +1,5 @@
 {
-  "name": "mobx",
+  "name": "@withdouble/mobx",
   "version": "5.9.0",
   "description": "Simple, scalable state management.",
   "main": "lib/mobx.js",
