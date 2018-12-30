@@ -93,9 +93,9 @@ export function runInAction(arg1, arg2?) {
     return executeAction(actionName, fn, this, undefined)
 }
 
-export async function asyncRunInAction<T>(block: () => T): T
-export async function asyncRunInAction<T>(name: string, block: () => T): T
-export async function asyncRunInAction(arg1, arg2?) {
+export function asyncRunInAction<T>(block: () => T): T
+export function asyncRunInAction<T>(name: string, block: () => T): T
+export function asyncRunInAction(arg1, arg2?) {
     const actionName = typeof arg1 === "string" ? arg1 : arg1.name || "<unnamed action>"
     const fn = typeof arg1 === "function" ? arg1 : arg2
 
