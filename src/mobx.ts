@@ -112,6 +112,7 @@ export {
     action,
     isAction,
     runInAction,
+    asyncRunInAction,
     IActionFactory,
     keys,
     values,

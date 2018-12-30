@@ -4,6 +4,7 @@ import {
     boundActionDecorator,
     createAction,
     executeAction,
+    executeAsyncAction,
     fail,
     invariant,
     namedActionDecorator
@@ -90,6 +91,24 @@ export function runInAction(arg1, arg2?) {
     }
 
     return executeAction(actionName, fn, this, undefined)
+}
+
+export async function asyncRunInAction<T>(block: () => T): T
+export async function asyncRunInAction<T>(name: string, block: () => T): T
+export async function asyncRunInAction(arg1, arg2?) {
+    const actionName = typeof arg1 === "string" ? arg1 : arg1.name || "<unnamed action>"
+    const fn = typeof arg1 === "function" ? arg1 : arg2
+
+    if (process.env.NODE_ENV !== "production") {
+        invariant(
+            typeof fn === "function" && fn.length === 0,
+            "`runInAction` expects a function without arguments"
+        )
+        if (typeof actionName !== "string" || !actionName)
+            fail(`actions should have valid names, got: '${actionName}'`)
+    }
+
+    return executeAsyncAction(actionName, fn, this, undefined)
 }
 
 export function isAction(thing: any) {
