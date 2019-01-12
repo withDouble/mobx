@@ -5,6 +5,7 @@ import {
     createAction,
     executeAction,
     executeAsyncAction,
+    executePauseReactions,
     fail,
     invariant,
     namedActionDecorator
@@ -109,6 +110,11 @@ export function asyncRunInAction(arg1, arg2?) {
     }
 
     return executeAsyncAction(actionName, fn, this, undefined)
+}
+
+export function pauseReactions(name: string) {
+    const actionName = name || "<unnamed transation>"
+    return executePauseReactions(name)
 }
 
 export function isAction(thing: any) {

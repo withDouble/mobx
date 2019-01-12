@@ -57,6 +57,11 @@ export function executeAsyncAction(
     return fn.apply(scope, args).finally(() => endAction(runInfo))
 }
 
+export function executePauseReactions(actionName: string) {
+    const runInfo = startAction(actionName)
+    return endAction.bind(null, runInfo)
+}
+
 interface IActionRunInfo {
     prevDerivation: IDerivation | null
     prevAllowStateChanges: boolean
