@@ -118,6 +118,7 @@ export {
     isAction,
     runInAction,
     asyncRunInAction,
+    pauseReactions,
     IActionFactory,
     keys,
     values,
