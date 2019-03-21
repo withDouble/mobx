@@ -54,7 +54,9 @@ export function executeAsyncAction(
     args?: IArguments
 ) {
     const runInfo = startAction(actionName, fn, scope, args)
-    return fn.apply(scope, args).finally(() => endAction(runInfo))
+    const execution = fn.apply(scope, args)
+    execution.finally(() => endAction(runInfo))
+    return execution
 }
 
 export function executePauseReactions(actionName: string) {
